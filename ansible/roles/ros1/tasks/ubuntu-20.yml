@@ -1,0 +1,32 @@
+---
+- name: Add repository.
+  become: true
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: |
+    sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+    apt install -y curl
+    curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
+
+- name: Install ROS.
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+    name:
+      - ros-noetic-desktop-full
+
+- name: Enable ROS and install rosdep.
+  become: false
+  args:
+    executable: /bin/bash
+  ansible.builtin.shell: |
+    gosu ${NB_USER} bash <<'EOS'
+
+    echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+    source /opt/ros/noetic/setup.bash
+
+    sudo apt install -y python3-rosdep
+    sudo rosdep init
+    rosdep update
+
+    EOS

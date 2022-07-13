@@ -1,0 +1,7 @@
+- name: Import jupyterlab
+  import_playbook: jupyterlab.yaml
+
+- hosts: localhost
+  connection: local
+  roles:
+    - role: takedalab.notebook_images.ros1
