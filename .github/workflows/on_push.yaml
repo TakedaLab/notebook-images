@@ -21,7 +21,7 @@ jobs:
           - "nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04"
         playbook:
           - jupyterlab
-          - jupyterlab-ros1
+          - jupyterlab_ros1
     steps:
       - name: Clone repo
         uses: actions/checkout@v2
