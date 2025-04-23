@@ -18,6 +18,7 @@ jobs:
       matrix:
         base_image:
           - "ubuntu:22.04"
+          - "nvidia/cuda:12.6.3-cudnn-devel-ubuntu22.04"
           - "nvidia/cuda:12.5.1-cudnn-devel-ubuntu22.04"
           - "nvidia/cuda:12.3.2-cudnn9-devel-ubuntu22.04"
           - "nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04"
